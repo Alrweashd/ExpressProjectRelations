@@ -32,6 +32,9 @@ exports.signin = async (req, res) => {
 
 exports.signup = async (req, res) => {
   try {
+    if (req.file) {
+      req.body.image = `${req.file.path}`;
+    }
     const { password } = req.body;
     req.body.password = await hashedPassword(password);
     const newUser = await User.create(req.body);
@@ -44,11 +47,18 @@ exports.signup = async (req, res) => {
   }
 };
 
-exports.getUsers = async (req, res) => {
+exports.getUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    if (req.user.username === "admin") {
+      const users = await User.find();
+      res.status(201).json(users);
+    }
     //.populate("urls");
-    res.status(201).json(users);
+    else {
+      const err = new Error("you are not admin");
+      err.status = 404;
+      next(err);
+    }
   } catch (err) {
     res.status(500).json("Server Error");
   }
