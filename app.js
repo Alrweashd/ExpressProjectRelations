@@ -14,11 +14,12 @@ app.use(passport.initialize());
 // passport.use(localStrategy);
 // passport.use(jwtStrategy);
 connectDb();
+const userRoutes = require("./users/users.routes");
 
 app.use(express.json());
 
 // app.use("/urls", urlRoutes);
-// app.use(userRoutes);
+app.use("/users", userRoutes);
 
 app.use((req, res, next) => {
   const err = new Error("Not Found");

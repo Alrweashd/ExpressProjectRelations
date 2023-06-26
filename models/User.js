@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  email: String,
-  image: String,
-  isStaff: Boolean, // true => can create genre, movie, actors
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  email: { type: String, required: true },
+  image: { type: String },
+  isStaff: { type: Boolean, required: true }, // true => can create genre, movie, actors
   // urls: [
   //   {
   //     type: mongoose.Schema.Types.ObjectId,
