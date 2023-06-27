@@ -1,5 +1,6 @@
 const connectDb = require("./database");
 const userRoutes = require("./users/users.routes");
+const userMovie = require("./movies/movies.routes");
 const errorHandler = require("./middlewares/errorHandler");
 const notFoundPath = require("./middlewares/notFoundPath");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");
@@ -25,7 +26,7 @@ console.log(path.join(__dirname, "media"));
 connectDb();
 // app.use("/urls", urlRoutes);
 app.use("/user", userRoutes);
-
+app.use("/movie", userMovie);
 app.use(notFoundPath);
 app.use(errorHandler);
 

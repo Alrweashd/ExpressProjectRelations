@@ -30,7 +30,7 @@ exports.signin = async (req, res) => {
   }
 };
 
-exports.signup = async (req, res) => {
+exports.signup = async (req, res, next) => {
   try {
     if (req.file) {
       req.body.image = `${req.file.path}`;
@@ -43,12 +43,13 @@ exports.signup = async (req, res) => {
     console.log(req.body);
     res.status(201).json({ token });
   } catch (err) {
-    res.status(500).json("Server Error");
+    next(err);
   }
 };
 
 exports.getUsers = async (req, res, next) => {
   try {
+    const users = await User.find();
     if (req.user.username === "admin") {
       const users = await User.find();
       res.status(201).json(users);
