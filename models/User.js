@@ -5,13 +5,7 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   email: { type: String },
   image: { type: String },
-  isStaff: { type: Boolean, required: true }, // true => can create genre, movie, actors
-  // urls: [
-  //   {
-  //     type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'Url',
-  //   },
-  // ],
+  isStaff: { type: Boolean, default: false }, // true => can create genre, movie, actors
 });
 
 module.exports = mongoose.model("User", UserSchema);
