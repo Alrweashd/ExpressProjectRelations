@@ -33,11 +33,12 @@ exports.actorAdd = async (req, res, next) => {
     if (req.user.isStaff === true) {
       const actor = await Actor.findById(actorId);
       if (!actor) return next({ status: 404, message: "actor not found" });
-      const updatedMovie = await Movie.findByIdAndUpdate(req.movie._id, {
+      //updatedMovie
+      await Movie.findByIdAndUpdate(req.movie._id, {
         $push: { actors: actor._id },
       });
-      //pushing movie id to actor
-      const updatedActor = await Actor.findByIdAndUpdate(actorId, {
+      //pushing movie id to actor updatedActor
+      await Actor.findByIdAndUpdate(actorId, {
         $push: { movies: req.movie._id },
       });
       res.status(201).end();
@@ -50,6 +51,7 @@ exports.actorAdd = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.genreAdd = async (req, res, next) => {
   try {
     //you cannot add a tag without having a post before hand
@@ -58,12 +60,12 @@ exports.genreAdd = async (req, res, next) => {
     if (req.user.isStaff === true) {
       const genre = await Genre.findById(genreId);
       if (!genre) return next({ status: 404, message: "genre not found" });
-      const updatedMovie = await Movie.findByIdAndUpdate(req.movie._id, {
+      //updatedMovie
+      await Movie.findByIdAndUpdate(req.movie._id, {
         $push: { genres: genre._id },
       });
-
-      //pushing movie id to Genre
-      const updatedGenre = await Genre.findByIdAndUpdate(genreId, {
+      //pushing movie id to Genre updatedGenre
+      await Genre.findByIdAndUpdate(genreId, {
         $push: { movies: req.movie._id },
       });
       res.status(201).end();

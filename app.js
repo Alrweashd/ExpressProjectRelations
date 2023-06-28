@@ -12,8 +12,6 @@ const morgan = require("morgan");
 const passport = require("passport");
 const port = process.env.PORT;
 const app = express();
-// const urlRoutes = require("./api/urls/urls.routes");
-// const userRoutes = require("./api/users/users.routes");
 app.use(express.json());
 //for logs
 app.use(morgan("dev"));

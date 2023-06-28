@@ -2,7 +2,13 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const uploader = require("../middlewares/uploader");
-const { signup, signin, getUsers, getMovies } = require("./users.controllers");
+const {
+  signup,
+  signin,
+  getUsers,
+  getMovies,
+  createReview,
+} = require("./users.controllers");
 
 router.post("/signup", uploader.single("image"), signup);
 router.post(
@@ -18,5 +24,12 @@ router.get(
 );
 
 router.get("/all", passport.authenticate("jwt", { session: false }), getUsers);
+
+//add review
+router.post(
+  "/review/:movieId",
+  passport.authenticate("jwt", { session: false }),
+  createReview
+);
 //http://localhost:8000/users/*
 module.exports = router;

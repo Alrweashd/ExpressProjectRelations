@@ -4,8 +4,6 @@ exports.createGenre = async (req, res, next) => {
   try {
     console.log(req.user);
     if (req.user.isStaff === true) {
-      //req.user._id from the token
-      console.log("heree", req.user);
       const genre = await Genre.create(req.body);
       res.status(201).json(genre);
     } else {
@@ -22,8 +20,6 @@ exports.getGenre = async (req, res, next) => {
   try {
     console.log(req.user);
     if (req.user.isStaff === true) {
-      //req.user._id from the token
-      console.log("heree", req.user);
       const genres = await Genre.find();
       res.status(201).json(genres);
     } else {
