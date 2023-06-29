@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const ReviewSchema = new mongoose.Schema({
-  textReview: String,
-  rating: Number, //not an array
+  textReview: { type: String },
+  rating: { type: Number, min: 0, max: 10, default: 0 }, //not an array
   movieId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Movie",

@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const Movie = require("../models/Movie");
-const Review = require("../models/Review");
+
 const hashedPassword = require("../utils/auth/hashingPassword");
 const generateToken = require("../utils/auth/generateToken");
 
@@ -55,42 +55,5 @@ exports.getUsers = async (req, res, next) => {
     res.status(500).json("Server Error");
   }
 };
-exports.getMovies = async (req, res, next) => {
-  try {
-    const movies = await Movie.find()
-      .populate("actors")
-      .populate("genres")
-      .populate("reviews");
-    console.log(req.user);
-    res.status(201).json(movies);
-  } catch (err) {
-    next(err);
-  }
-};
-exports.createReview = async (req, res, next) => {
-  try {
-    const { movieId } = req.params;
-    if (req.user.isStaff === false) {
-      const movie = await Movie.findById(movieId);
-      if (!movie) return next({ status: 404, message: "movie not found" });
-      const review = await Review.create({
-        ...req.body,
-        movieId: movieId,
-        userId: req.user._id,
-      });
-      //const updatedMovie =
-      await Movie.findByIdAndUpdate(movieId, {
-        $push: { reviews: review._id },
-      });
-      //pushing movie id to actor
-      res.status(201).end();
-    } else {
-      const err = new Error("You arent a user, you cannt post a review");
-      err.status = 404;
-      next(err);
-    }
-  } catch (err) {
-    next(err);
-  }
-};
+
 //createReview if isStaff false. reviewAdd to movie, movieId to review

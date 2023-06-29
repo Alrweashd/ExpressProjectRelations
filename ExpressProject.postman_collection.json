@@ -1,0 +1,419 @@
+{
+	"info": {
+		"_postman_id": "95a9a65c-350a-4fc6-aba3-ec9bc0f8e2de",
+		"name": "ExpressProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27986513"
+	},
+	"item": [
+		{
+			"name": "get all users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDliNjgxZDVhMjY3ZWY4ODg5ZTA5MzEiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDM0MjYyLCJleHAiOjE2ODgwNTIyNjJ9.acBYp37JR_2jC_iQNi7SQfZGITltzAs-vD0tkh7QEQQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/users/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"users",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMovie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODMyMWViOTlhYzRiZjY1ZmY2MWQiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDQ0Mzg0LCJleHAiOjE2ODgwNjIzODR9.ZKK3_WCixoSdeEMj0mf4H-TVNY6s9VA1gEh2L64zA3I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"John Wick: Chapter 4\",\"relaseDate\":\"2023\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign in",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"Turki\",\"password\":\"12345678Aa\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/users/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "Bashyer",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678Aa",
+							"type": "text"
+						},
+						{
+							"key": "isStaff",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "Bashyer@Bashyer.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8001/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create actor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODMyMWViOTlhYzRiZjY1ZmY2MWQiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDQ0Mzg0LCJleHAiOjE2ODgwNjIzODR9.ZKK3_WCixoSdeEMj0mf4H-TVNY6s9VA1gEh2L64zA3I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"Keanu Reeves\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/actors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create genre",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODMyMWViOTlhYzRiZjY1ZmY2MWQiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDQ0Mzg0LCJleHAiOjE2ODgwNjIzODR9.ZKK3_WCixoSdeEMj0mf4H-TVNY6s9VA1gEh2L64zA3I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"action\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/genres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"genres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add actors to movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODMyMWViOTlhYzRiZjY1ZmY2MWQiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDQ0Mzg0LCJleHAiOjE2ODgwNjIzODR9.ZKK3_WCixoSdeEMj0mf4H-TVNY6s9VA1gEh2L64zA3I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/movies/649d879a789150fd505f7fa4/649d87c1789150fd505f7fa7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"movies",
+						"649d879a789150fd505f7fa4",
+						"649d87c1789150fd505f7fa7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add genre to movie",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODMyMWViOTlhYzRiZjY1ZmY2MWQiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDQ0Mzg0LCJleHAiOjE2ODgwNjIzODR9.ZKK3_WCixoSdeEMj0mf4H-TVNY6s9VA1gEh2L64zA3I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/movies/649d879a789150fd505f7fa4/649c22f16bb626cb01faf558",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"movies",
+						"649d879a789150fd505f7fa4",
+						"649c22f16bb626cb01faf558"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get movie with actors gentre details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODMyMWViOTlhYzRiZjY1ZmY2MWQiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDQ0Mzg0LCJleHAiOjE2ODgwNjIzODR9.ZKK3_WCixoSdeEMj0mf4H-TVNY6s9VA1gEh2L64zA3I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create review",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODZiMTc4OTE1MGZkNTA1ZjdmN2QiLCJ1c2VybmFtZSI6IkJhc2h5ZXIiLCJpYXQiOjE2ODgwNDUyNDAsImV4cCI6MTY4ODA2MzI0MH0.UcJYIb53bTEoBfk8ioMLQfFo_oQDgl4uIH2sTYaHTEk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"textReview\":\"Pure power, John Wick: Chapter 4 is as exhilarating as it is exhausting. With this wildly satisfying world tour de force, Reeves’ Wick transcends icon status delivering the perfect bone-crunching crescendo to one of the great action franchises in cinema history. It’s pure gold.\",\"rating\":10}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8001/movies/649d879a789150fd505f7fa4/review",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"movies",
+						"649d879a789150fd505f7fa4",
+						"review"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get movie by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODYyMDc4OTE1MGZkNTA1ZjdmNjYiLCJ1c2VybmFtZSI6IlR1cmtpIiwiaWF0IjoxNjg4MDQ1MTEwLCJleHAiOjE2ODgwNjMxMTB9._opx6EE8K2mmM-ft3Oi2Hd-ZBF85mf8xQXcDPiwE_qI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/movies/649d879a789150fd505f7fa4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"movies",
+						"649d879a789150fd505f7fa4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get reviews for a user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODZiMTc4OTE1MGZkNTA1ZjdmN2QiLCJ1c2VybmFtZSI6IkJhc2h5ZXIiLCJpYXQiOjE2ODgwNDUyNDAsImV4cCI6MTY4ODA2MzI0MH0.UcJYIb53bTEoBfk8ioMLQfFo_oQDgl4uIH2sTYaHTEk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/movies/review",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"movies",
+						"review"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

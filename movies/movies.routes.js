@@ -8,21 +8,46 @@ const {
   fetchMovie,
   genreAdd,
   actorAdd,
+  getMovieById,
+  createReview,
+  getMovies,
+  getReview,
 } = require("./movies.controllers");
+
 router.param("movieId", async (req, res, next, movieId) => {
-  const movie = await fetchMovie(movieId, next);
-  if (movie) {
+  try {
+    const movie = await fetchMovie(movieId);
+    console.log("herree", movie);
+    if (!movie) return next({ status: 404, message: "movie not found" });
+
     req.movie = movie;
     next();
-  } else {
-    const err = new Error("Post Not Found");
-    err.status = 404;
-    next(err);
+  } catch (error) {
+    return next(error);
   }
 });
 
 router.post("/", passport.authenticate("jwt", { session: false }), createMovie);
+router.get("/", passport.authenticate("jwt", { session: false }), getMovies);
 
+//add review
+router.post(
+  "/:movieId/review",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    console.log("Inside route");
+    next();
+  },
+  createReview
+);
+
+//get reviews
+router.get(
+  "/review",
+  passport.authenticate("jwt", { session: false }),
+  getReview
+);
+//for relations
 router.put(
   "/:movieId/:actorId",
   passport.authenticate("jwt", { session: false }),
@@ -33,6 +58,11 @@ router.post(
   "/:movieId/:genreId",
   passport.authenticate("jwt", { session: false }),
   genreAdd
+);
+router.get(
+  "/:movieId",
+  passport.authenticate("jwt", { session: false }),
+  getMovieById
 );
 
 //http://localhost:8000/movies/*

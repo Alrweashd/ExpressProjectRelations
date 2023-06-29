@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const GenreSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   //not an array
   movies: [
     {
