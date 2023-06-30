@@ -1,7 +1,7 @@
-const Movie = require("../models/Movie");
-const Actor = require("../models/Actor");
-const Genre = require("../models/Genre");
-const Review = require("../models/Review");
+const Movie = require("../../models/Movie");
+const Actor = require("../../models/Actor");
+const Genre = require("../../models/Genre");
+const Review = require("../../models/Review");
 //fetch movie
 exports.fetchMovie = async (movieId) => {
   const movie = await Movie.findById(movieId);
@@ -98,9 +98,8 @@ exports.getMovies = async (req, res, next) => {
     const movies = await Movie.find()
       .populate("actors")
       .populate("genres")
-      .populate("reviews")
-      .select("-_id -updatedAt -__v");
-    console.log(req.user);
+      .populate("reviews");
+    // .select("-_id -updatedAt -__v");
     res.status(201).json(movies);
   } catch (err) {
     next(err);
@@ -114,7 +113,6 @@ exports.getMovieById = async (req, res, next) => {
       .populate("genres")
       .populate("reviews")
       .select("-_id -updatedAt -__v");
-    console.log(req.user);
     res.status(201).json(movie);
   } catch (err) {
     next(err);
@@ -126,9 +124,10 @@ exports.createReview = async (req, res, next) => {
 
     if (!req.user.isStaff) {
       let reviewed = false;
-      for (let i = 0; i <= req.movie.reviews.length - 1; i++) {
-        let { userId } = await Review.findById(req.movie.reviews[i]);
-        if (userId.equals(req.user._id)) {
+      //getting reviews from the movie
+      let { reviews: movieReviews } = await req.movie.populate("reviews");
+      for (let i = 0; i <= movieReviews.length - 1; i++) {
+        if (movieReviews[i].userId.equals(req.user._id)) {
           reviewed = true;
         }
       }

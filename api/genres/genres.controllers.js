@@ -1,4 +1,4 @@
-const Genre = require("../models/Genre");
+const Genre = require("../../models/Genre");
 //createGenre
 exports.createGenre = async (req, res, next) => {
   try {

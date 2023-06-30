@@ -1,8 +1,8 @@
-const User = require("../models/User");
-const Movie = require("../models/Movie");
+const User = require("../../models/User");
+const Movie = require("../../models/Movie");
 
-const hashedPassword = require("../utils/auth/hashingPassword");
-const generateToken = require("../utils/auth/generateToken");
+const hashedPassword = require("../../utils/auth/hashingPassword");
+const generateToken = require("../../utils/auth/generateToken");
 
 exports.signin = async (req, res, next) => {
   try {
@@ -55,5 +55,21 @@ exports.getUsers = async (req, res, next) => {
     res.status(500).json("Server Error");
   }
 };
+exports.deleteUserById = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    if (req.user.username === "admin") {
+      const user = await User.findById({ _id: userId });
+      if (!user) return next({ status: 404, message: "User doesn't exist" });
 
-//createReview if isStaff false. reviewAdd to movie, movieId to review
+      await User.deleteOne({ _id: userId });
+      res.status(201).json({
+        message: `User with username: ${user.username} has been deleted successfully!!`,
+      });
+    } else {
+      next({ status: 404, message: "You aren't an admin" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};

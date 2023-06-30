@@ -17,9 +17,7 @@ const {
 router.param("movieId", async (req, res, next, movieId) => {
   try {
     const movie = await fetchMovie(movieId);
-    console.log("herree", movie);
     if (!movie) return next({ status: 404, message: "movie not found" });
-
     req.movie = movie;
     next();
   } catch (error) {

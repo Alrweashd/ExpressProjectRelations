@@ -1,8 +1,8 @@
 const connectDb = require("./database");
-const userRoutes = require("./users/users.routes");
-const userMovie = require("./movies/movies.routes");
-const userActor = require("./actors/actors.routes");
-const userGenre = require("./genres/genres.routes");
+const userRoutes = require("./api/users/users.routes");
+const userMovie = require("./api/movies/movies.routes");
+const userActor = require("./api/actors/actors.routes");
+const userGenre = require("./api/genres/genres.routes");
 const errorHandler = require("./middlewares/errorHandler");
 const notFoundPath = require("./middlewares/notFoundPath");
 const { localStrategy, jwtStrategy } = require("./middlewares/passport");

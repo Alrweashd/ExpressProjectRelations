@@ -33,19 +33,16 @@ exports.jwtStrategy = new JWTStrategy(
     secretOrKey: process.env.JWT_SECRET,
   },
   async (tokenPayload, done) => {
-    console.log("object");
     //check has the token expired ?? // it will run evey time
     if (Date.now > tokenPayload.exp * 1000) {
       return done(null, false);
     }
-    console.log("object2");
 
     try {
       //valid token exp
-      console.log(tokenPayload);
+      // console.log(tokenPayload);
       const user = await User.findById(tokenPayload._id);
       if (!user) return done(null, false);
-      console.log("object3");
       return done(null, user);
     } catch (error) {
       done(error);

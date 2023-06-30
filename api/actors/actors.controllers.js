@@ -1,4 +1,4 @@
-const Actor = require("../models/Actor");
+const Actor = require("../../models/Actor");
 //createActor post
 exports.createActor = async (req, res, next) => {
   try {
