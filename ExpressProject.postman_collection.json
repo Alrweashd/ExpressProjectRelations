@@ -113,7 +113,7 @@
 					"formdata": [
 						{
 							"key": "username",
-							"value": "Bashyer",
+							"value": "Aziz",
 							"type": "text"
 						},
 						{
@@ -128,7 +128,7 @@
 						},
 						{
 							"key": "email",
-							"value": "Bashyer@Bashyer.com",
+							"value": "Aziz@Aziz.com",
 							"type": "text"
 						}
 					]
@@ -323,7 +323,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODZiMTc4OTE1MGZkNTA1ZjdmN2QiLCJ1c2VybmFtZSI6IkJhc2h5ZXIiLCJpYXQiOjE2ODgwNDUyNDAsImV4cCI6MTY4ODA2MzI0MH0.UcJYIb53bTEoBfk8ioMLQfFo_oQDgl4uIH2sTYaHTEk",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkZjY1MjJmZjE3NTE5OTdiOTcwZTciLCJ1c2VybmFtZSI6IkF6aXoiLCJpYXQiOjE2ODgwNzM4MTcsImV4cCI6MTY4ODA5MTgxN30.ZAVNTYUnE8iJLiophADdNXJke4XKK__ymWeHv2LvRDA",
 							"type": "string"
 						}
 					]
@@ -332,7 +332,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"textReview\":\"Pure power, John Wick: Chapter 4 is as exhilarating as it is exhausting. With this wildly satisfying world tour de force, Reeves’ Wick transcends icon status delivering the perfect bone-crunching crescendo to one of the great action franchises in cinema history. It’s pure gold.\",\"rating\":10}",
+					"raw": "{\"textReview\":\"it was a great movie.\",\"rating\":8}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -363,7 +363,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODYyMDc4OTE1MGZkNTA1ZjdmNjYiLCJ1c2VybmFtZSI6IlR1cmtpIiwiaWF0IjoxNjg4MDQ1MTEwLCJleHAiOjE2ODgwNjMxMTB9._opx6EE8K2mmM-ft3Oi2Hd-ZBF85mf8xQXcDPiwE_qI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODMyMWViOTlhYzRiZjY1ZmY2MWQiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDg0NTI0LCJleHAiOjE2ODgxMDI1MjR9.0SWTvRzKWC1w3OsEp5mr3iccX0w6Bl718U0JEwARtd0",
 							"type": "string"
 						}
 					]
@@ -371,7 +371,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8001/movies/649d879a789150fd505f7fa4",
+					"raw": "http://localhost:8001/movies/649d8463eb99ac4bf65ff635",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -379,7 +379,7 @@
 					"port": "8001",
 					"path": [
 						"movies",
-						"649d879a789150fd505f7fa4"
+						"649d8463eb99ac4bf65ff635"
 					]
 				}
 			},
@@ -410,6 +410,36 @@
 					"path": [
 						"movies",
 						"review"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkODMyMWViOTlhYzRiZjY1ZmY2MWQiLCJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNjg4MDg0NTI0LCJleHAiOjE2ODgxMDI1MjR9.0SWTvRzKWC1w3OsEp5mr3iccX0w6Bl718U0JEwARtd0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/users/649e25c76441b524269ff042",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"users",
+						"649e25c76441b524269ff042"
 					]
 				}
 			},
