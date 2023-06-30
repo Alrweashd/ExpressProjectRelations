@@ -164,7 +164,9 @@ exports.getReview = async (req, res, next) => {
   try {
     if (!req.user.isStaff) {
       //find review for a user where userId =  req.user._id
-      const review = await Review.find({ userId: req.user._id });
+      const review = await Review.find({ userId: req.user._id }).select(
+        "-_id -updatedAt -__v"
+      );
       res.status(200).json(review);
     } else {
       const err = new Error("You arent a user, you cannt post a review");
