@@ -7,6 +7,7 @@ const generateToken = require("../../utils/auth/generateToken");
 exports.signin = async (req, res, next) => {
   try {
     // req.use from passport
+    console.log("first");
     const token = generateToken(req.user);
     res.status(201).json({ token });
   } catch (err) {
@@ -22,8 +23,9 @@ exports.signup = async (req, res, next) => {
     }
     const { password } = req.body;
     if (
-      !password ||
-      !password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
+      !password
+      // ||
+      // !password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)
     ) {
       return next({
         message:
@@ -34,7 +36,8 @@ exports.signup = async (req, res, next) => {
     req.body.password = await hashedPassword(password);
     req.body.isStaff = false;
     const newUser = await User.create(req.body);
-    res.status(201).json(newUser);
+    const token = generateToken(newUser);
+    res.status(201).json({ token });
   } catch (err) {
     next(err);
   }
@@ -43,7 +46,7 @@ exports.signup = async (req, res, next) => {
 exports.getUsers = async (req, res, next) => {
   try {
     console.log(req.user);
-    if (req.user.username === "admin") {
+    if (req.user.username === "admin" || req.user.isStaff) {
       const users = await User.find();
       res.status(201).json(users);
     } else {

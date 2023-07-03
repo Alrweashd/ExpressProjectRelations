@@ -5,7 +5,7 @@ const JWTStrategy = require("passport-jwt").Strategy;
 const { fromAuthHeaderAsBearerToken } = require("passport-jwt").ExtractJwt;
 //to login in and verify the username and password if they are eqaul to crypted one
 exports.localStrategy = new LocalStrategy(
-  { usernameField: "userOrEmail" }, //optional but the default is username
+  { usernameField: "username" }, //optional but the default is username
   async (userOrEmail, password, done) => {
     try {
       const user = await User.findOne({

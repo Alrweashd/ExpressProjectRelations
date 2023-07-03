@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const MovieSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, unique: true },
-    relaseDate: { type: String, required: true }, //not an array
+    relaseDate: { type: Date, required: true }, //not an array
 
     reviews: [
       {
