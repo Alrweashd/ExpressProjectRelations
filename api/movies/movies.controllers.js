@@ -99,7 +99,9 @@ exports.genreAdd = async (req, res, next) => {
 };
 exports.getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find().populate("actors genres reviews");
+    const movies = await Movie.find().populate(
+      "actors genres reviews createdBy"
+    );
 
     // .select("-_id -updatedAt -__v");
     res.status(201).json(movies);
@@ -111,7 +113,7 @@ exports.getMovies = async (req, res, next) => {
 exports.getMovieById = async (req, res, next) => {
   try {
     const movie = await Movie.findById(req.movie._id)
-      .populate("actors genres reviews")
+      .populate("actors genres reviews createdBy")
       .select("-_id -updatedAt -__v");
     res.status(201).json(movie);
   } catch (err) {
@@ -168,7 +170,7 @@ exports.getReview = async (req, res, next) => {
       //find review for a user where userId =  req.user._id
       const review = await Review.find({ userId: req.user._id })
         .select("-_id -updatedAt -__v")
-        .populate("movieId");
+        .populate("movieId userId");
       res.status(200).json(review);
     } else {
       const err = new Error("You aren't a user, you cannot have a review");

@@ -7,8 +7,9 @@ const generateToken = require("../../utils/auth/generateToken");
 exports.signin = async (req, res, next) => {
   try {
     // req.use from passport
-    if (!req.user) console.log("req.user._id");
 
+    if (!req.user) console.log("req.user._id");
+    console.log(req.user);
     const token = generateToken(req.user);
     res.status(201).json({ token });
   } catch (err) {
@@ -36,6 +37,8 @@ exports.signup = async (req, res, next) => {
     req.body.password = await hashedPassword(password);
     req.body.isStaff = false;
     req.body.isAdmin = false;
+    req.body.username = req.body.username.toUpperCase();
+    req.body.email = req.body.email.toUpperCase();
     const newUser = await User.create(req.body);
     const token = generateToken(newUser);
     res.status(201).json({ token });
@@ -49,7 +52,7 @@ exports.getUsers = async (req, res, next) => {
     console.log(req.user);
 
     if (req.user.isAdmin) {
-      const users = await User.find();
+      const users = await User.find().populate("reviews");
       res.status(201).json(users);
     } else {
       const err = new Error("you are not admin");
