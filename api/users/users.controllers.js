@@ -37,11 +37,8 @@ exports.signup = async (req, res, next) => {
     req.body.isStaff = false;
     req.body.isAdmin = false;
     const newUser = await User.create(req.body);
-    res
-      .status(201)
-      .json(
-        `username: ${newUser.username} with the id ${newUser._id} has been created`
-      );
+    const token = generateToken(newUser);
+    res.status(201).json({ token });
   } catch (err) {
     next(err);
   }
@@ -50,6 +47,7 @@ exports.signup = async (req, res, next) => {
 exports.getUsers = async (req, res, next) => {
   try {
     console.log(req.user);
+
     if (req.user.isAdmin) {
       const users = await User.find();
       res.status(201).json(users);
