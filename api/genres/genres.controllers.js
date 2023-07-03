@@ -3,8 +3,11 @@ const Genre = require("../../models/Genre");
 exports.createGenre = async (req, res, next) => {
   try {
     console.log(req.user);
-    if (req.user.isStaff === true) {
-      const genre = await Genre.create(req.body);
+    if (req.user.isStaff) {
+      const genre = await Genre.create({
+        ...req.body,
+        createdBy: req.user._id,
+      });
       res.status(201).json(genre);
     } else {
       const err = new Error("You arent a staff member");
@@ -19,7 +22,7 @@ exports.createGenre = async (req, res, next) => {
 exports.getGenre = async (req, res, next) => {
   try {
     console.log(req.user);
-    if (req.user.isStaff === true) {
+    if (req.user.isStaff) {
       const genres = await Genre.find();
       res.status(201).json(genres);
     } else {

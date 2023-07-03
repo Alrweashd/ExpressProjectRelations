@@ -24,6 +24,7 @@ const MovieSchema = new mongoose.Schema(
         ref: "Genre",
       },
     ],
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   },
   { timestamps: true }
 );

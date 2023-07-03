@@ -7,6 +7,8 @@ const generateToken = require("../../utils/auth/generateToken");
 exports.signin = async (req, res, next) => {
   try {
     // req.use from passport
+    if (!req.user) console.log("req.user._id");
+
     const token = generateToken(req.user);
     res.status(201).json({ token });
   } catch (err) {
@@ -33,8 +35,13 @@ exports.signup = async (req, res, next) => {
     }
     req.body.password = await hashedPassword(password);
     req.body.isStaff = false;
+    req.body.isAdmin = false;
     const newUser = await User.create(req.body);
-    res.status(201).json(newUser);
+    res
+      .status(201)
+      .json(
+        `username: ${newUser.username} with the id ${newUser._id} has been created`
+      );
   } catch (err) {
     next(err);
   }
@@ -43,7 +50,7 @@ exports.signup = async (req, res, next) => {
 exports.getUsers = async (req, res, next) => {
   try {
     console.log(req.user);
-    if (req.user.username === "admin") {
+    if (req.user.isAdmin) {
       const users = await User.find();
       res.status(201).json(users);
     } else {
@@ -58,7 +65,7 @@ exports.getUsers = async (req, res, next) => {
 exports.deleteUserById = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    if (req.user.username === "admin") {
+    if (req.user.isAdmin) {
       const user = await User.findById({ _id: userId });
       if (!user) return next({ status: 404, message: "User doesn't exist" });
 

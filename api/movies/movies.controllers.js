@@ -14,7 +14,11 @@ exports.createMovie = async (req, res, next) => {
     if (req.user.isStaff) {
       //req.user._id from the token
       console.log("heree", req.user);
-      const movie = await Movie.create(req.body);
+
+      const movie = await Movie.create({
+        ...req.body,
+        createdBy: req.user._id,
+      });
       res.status(201).json(movie);
     } else {
       const err = new Error("You arent a staff member");
@@ -95,10 +99,8 @@ exports.genreAdd = async (req, res, next) => {
 };
 exports.getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie.find()
-      .populate("actors")
-      .populate("genres")
-      .populate("reviews");
+    const movies = await Movie.find().populate("actors genres reviews");
+
     // .select("-_id -updatedAt -__v");
     res.status(201).json(movies);
   } catch (err) {
@@ -109,9 +111,7 @@ exports.getMovies = async (req, res, next) => {
 exports.getMovieById = async (req, res, next) => {
   try {
     const movie = await Movie.findById(req.movie._id)
-      .populate("actors")
-      .populate("genres")
-      .populate("reviews")
+      .populate("actors genres reviews")
       .select("-_id -updatedAt -__v");
     res.status(201).json(movie);
   } catch (err) {
@@ -123,35 +123,37 @@ exports.createReview = async (req, res, next) => {
     const movieId = req.movie._id;
 
     if (!req.user.isStaff) {
-      let reviewed = false;
-      //getting reviews from the movie
-      let { reviews: movieReviews } = await req.movie.populate("reviews");
-      for (let i = 0; i <= movieReviews.length - 1; i++) {
-        if (movieReviews[i].userId.equals(req.user._id)) {
-          reviewed = true;
-        }
-      }
-      if (reviewed) {
+      const reviewFound = await Review.findOne({
+        userId: req.user._id,
+        movieId: movieId,
+      });
+      if (reviewFound) {
+        console.log("found review", reviewFound);
         const err = new Error(
           `movie '${req.movie.name}' already review by the user '${req.user.username}'`
         );
         err.status = 404;
         next(err);
       }
-      // const reviewedByUser = await Review.
+
       const review = await Review.create({
         ...req.body,
         movieId: movieId,
         userId: req.user._id,
       });
+      console.log(review);
       //const updatedMovie =
       await req.movie.updateOne({
+        $push: { reviews: review._id },
+      });
+      //user reviews
+      await req.user.updateOne({
         $push: { reviews: review._id },
       });
       //pushing movie id to actor
       res.status(201).end();
     } else {
-      const err = new Error("You arent a user, you cannt post a review");
+      const err = new Error("You aren't a user, you cannot post a review");
       err.status = 404;
       next(err);
     }
@@ -164,12 +166,12 @@ exports.getReview = async (req, res, next) => {
   try {
     if (!req.user.isStaff) {
       //find review for a user where userId =  req.user._id
-      const review = await Review.find({ userId: req.user._id }).select(
-        "-_id -updatedAt -__v"
-      );
+      const review = await Review.find({ userId: req.user._id })
+        .select("-_id -updatedAt -__v")
+        .populate("movieId");
       res.status(200).json(review);
     } else {
-      const err = new Error("You arent a user, you cannt post a review");
+      const err = new Error("You aren't a user, you cannot have a review");
       err.status = 404;
       next(err);
     }
